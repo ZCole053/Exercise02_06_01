@@ -10,8 +10,26 @@
 
 <body>
     <?php
+    //entry did we get in with a submit
     if(isset($_POST['submit'])){
-
+        $subject = stripslashes($_POST['subject']);
+        $name = stripslashes($_POST['name']);
+        $message = stripslashes($_POST['message']);
+        $subject = str_replace("~","-",$subject);//replaces character
+        $name = str_replace("~","-",$name);
+        $message = str_replace("~","-",$message);
+        $messageRecord =  "$subject~$name~$message\n";//delimitated data
+        $filehandle = fopen("messages.txt", "ab");//opens file and appends in binary
+        //if file handle open
+        if (!$filehandle){
+            //error message
+            echo "There was an error saving your message!\n";
+        }else{
+            //writes to the text file
+            fwrite($filehandle, $messageRecord);
+            fclose($filehandle);
+            echo "Your message has been saved.\n";
+        }
     }
     ?>
     <h1>Post New Message</h1>
