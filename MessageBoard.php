@@ -35,6 +35,14 @@ if (isset($_GET['action'])){
                 $messageArray = array_unique($messageArray);
                 $messageArray = array_values($messageArray);
                 break;
+            case 'Sort Ascending':
+                //sorts the array from a-z
+                sort($messageArray);
+                break;
+            case 'Sort Decending':
+                //sorts the array from a-z
+                rsort($messageArray);
+                break;
         //checks to see if there is anything in the array
         }if(count($messageArray) > 0){
             $newMessages = implode($messageArray);
@@ -89,8 +97,11 @@ if(!file_exists("messages.txt") || filesize("messages.txt") == 0){
 <p>
 <a href="PostMessage.php">Post New Message </a><br>
 <!-- query string passes data as name value pair -->
+<a href="MessageBoard.php?action=Sort%20Ascending">Sort Subject A-Z</a><br>
+<a href="MessageBoard.php?action=Sort%20Decending">Sort Subject Z-A</a><br>
 <a href="MessageBoard.php?action=Delete%20First">Delete first Message</a><br>
 <a href="MessageBoard.php?action=Delete%20Last">Delete Last Message</a><br>
+
 <!-- <a href="MessageBoard.php?action=Remove%20Duplicates">Remove duplicates</a><br> -->
 </p>
 

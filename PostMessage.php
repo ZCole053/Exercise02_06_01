@@ -49,18 +49,24 @@
                 fwrite($filehandle, $messageRecord);
                 fclose($filehandle);
                 echo "Your message has been saved.\n";
+                $subject = "";
+                $name = "";
+                $message = "";
         } 
      }
-
-
+}else{
+        $subject = "";
+        $name = "";
+        $message = "";
     }
     ?>
     <h1>Post New Message</h1>
     <hr>
+    <!-- sticky -->
     <form action="PostMessage.php" method="post">
-        <span style="font-weight:bold">Subject: <input type="text" name="subject"></span>
-        <span style="font-weight:bold">Name: <input type="text" name="name"></span><br>
-        <textarea name="message" cols="80" rows="6" style="margin: 10px 5px 5px"></textarea> <br>
+        <span style="font-weight:bold">Subject: <input type="text" name="subject" value="<?php echo $subject; ?>"></span>
+        <span style="font-weight:bold">Name: <input type="text" name="name" value="<?php echo $name; ?>"></span><br>
+        <textarea name="message" cols="80" rows="6" style="margin: 10px 5px 5px" ><?php echo $message; ?></textarea> <br>
         <input type="reset" name="reset" value="Reset Form">
         <input type="submit" name="submit" value"Post Message">
     </form>
