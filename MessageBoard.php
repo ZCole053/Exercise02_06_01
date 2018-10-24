@@ -68,7 +68,7 @@ if(!file_exists("messages.txt") || filesize("messages.txt") == 0){
 
     }
     $index = 1;
-    $key = key($key);
+    $key = key($keMessageArray);
     foreach($keMessageArray as $message) { 
         $currMsg = explode("~",$message);
         echo "<tr>\n";
@@ -91,7 +91,7 @@ if(!file_exists("messages.txt") || filesize("messages.txt") == 0){
 <!-- query string passes data as name value pair -->
 <a href="MessageBoard.php?action=Delete%20First">Delete first Message</a><br>
 <a href="MessageBoard.php?action=Delete%20Last">Delete Last Message</a><br>
-<a href="MessageBoard.php?action=Remove%20Duplicates">Remove duplicates</a><br>
+<!-- <a href="MessageBoard.php?action=Remove%20Duplicates">Remove duplicates</a><br> -->
 </p>
 
 </body>
