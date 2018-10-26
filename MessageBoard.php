@@ -79,6 +79,7 @@ if(!file_exists("messages.txt") || filesize("messages.txt") == 0){
     $key = key($keMessageArray);
     foreach($keMessageArray as $message) { 
         $currMsg = explode("~",$message);
+        //makes a table 
         echo "<tr>\n";
         echo "<td width =\"5%\" style=\"text-align:center; font-weight:bold\">". $index . "</td>\n";
         echo "<td width=\"85%\"><span style=\"font-weight: bold\">Subject: </span>" . htmlentities($key) . "<br>\n";
