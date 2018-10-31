@@ -73,7 +73,6 @@ if(!file_exists("messages.txt") || filesize("messages.txt") == 0){
     for($i=0 ; $i < $count; $i++){
         $currMsg = explode("~",$messageArray[$i]);
         $keMessageArray[$currMsg[0]] = $currMsg[1] . "~". $currMsg[2];
-
     }
     $index = 1;
     $key = key($keMessageArray);
@@ -93,7 +92,6 @@ if(!file_exists("messages.txt") || filesize("messages.txt") == 0){
     }
     echo "</table>\n";
 }
-
 ?>
 <p>
 <a href="PostMessage.php">Post New Message </a><br>

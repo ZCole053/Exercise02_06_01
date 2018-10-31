@@ -16,7 +16,8 @@
             $fName = str_replace(";",":",$fName);
             $lName = str_replace(";",":",$lName);
             $email = str_replace(";",":",$email);
-            $messageRecord =  "$fName;$lName;$email\n";
+            $getFName = array();
+            $getLName = array();
             if(file_exists("Guest.txt") && filesize("Guest.txt") > 0){
                 $guestArray = file("Guest.txt");
                 $count = count($guestArray);
@@ -26,17 +27,26 @@
                    $getLName[] = $msg[1];
                 }
             }
-            $filehandle = fopen("Guest.txt", "ab");
-            if(!$filehandle){
-                echo "Error: Could not append to the file.\n";
+            if(in_array($fName,$getFName)){
+                echo "<strong>$fName</strong> already exist please enter a new username\n";
             }else{
-                fwrite($filehandle,$messageRecord);
-                fclose($filehandle);
-                echo "Your spot has been made\n";
-                $fName = "";
-                $lName = "";
-                $email = "";
+                if(empty($messageRecord)){
+                    echo "It be empty bro";
+                }
+                $messageRecord =  "$fName;$lName;$email\n";
+                $filehandle = fopen("Guest.txt", "ab");
+                if(!$filehandle){
+                    echo "Error: Could not append to the file.\n";
+                }else{
+                    fwrite($filehandle,$messageRecord);
+                    fclose($filehandle);
+                    echo "Your spot has been made\n";
+                    $fName = "";
+                    $lName = "";
+                    $email = "";
+                }
             }
+
         }else{
             $fName = "";
             $lName = "";
@@ -53,7 +63,8 @@
     </form>
     <hr>
     <p>
-        Please Click here to <a href="GuestBook.php">view Guest Book</a>.
+        To sign up fill out the information above and it will save you a spot in the guest book.
+        To see your saved spot please click here to view the <a href="GuestBook.php">Guest Book</a>.
     </p>
 </body>
 </html>

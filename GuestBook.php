@@ -8,7 +8,6 @@
 <body>
     <h2>Guest Book</h2>
     <?php
-
 if(isset($_GET['action'])){
     $guestArray= file("Guest.txt");
     switch($_GET['action']){
@@ -24,7 +23,11 @@ if(isset($_GET['action'])){
         case 'Sort Decending':
             rsort($guestArray);
             break;
-            
+        case 'Delete Message':
+            if(isset($_GET['message'])){
+            array_splice($guestArray, $_GET['message'],1);
+        }
+            break;
     }if(count($guestArray) > 0){
         $newMessages = implode($guestArray);
         $filehandle = fopen("Guest.txt", "wb");
@@ -36,22 +39,23 @@ if(isset($_GET['action'])){
         }
     }
 }
-
     $filehandle = fopen("Guest.txt", "rb" );
     //success
     if(file_exists("Guest.txt")){
         $displayArray = file("Guest.txt");
-        echo "<table style=\"background-color:lightgrey\" border=\"1\" width=\"50%\">\n"; 
-        $count = count($displayArray); 
-        for ($i=0; $i < $count; $i++) {  
-            $currMsg = explode(";",$displayArray[$i]); 
-            echo "<tr>\n"; 
+        echo "<table style=\"background-color:lightgrey\" border=\"1\" width=\"50%\">\n";
+        $count = count($displayArray);
+        $index =1;
+        for ($i=0; $i < $count; $i++) { 
+            $currMsg = explode(";",$displayArray[$i]);
+            echo "<tr>\n";
             echo "<td width=\"10%\" style=\"text-align:center\">". ($i +1). "</td>\n";
-            echo "<td width=\"90%\"><span>First Name:</span>".htmlentities($currMsg[0]). "<br>\n"; 
-            echo "<span>Last Name: </span>" . htmlentities($currMsg[1]) . "<br>\n"; 
-            echo "<span>E-mail: </span>" . htmlentities($currMsg[2]) . "</td>\n"; 
-            echo "<td width=\"10%\" style=\"text-align:center\">". "<a href='GuestBook.php?". "action=Delete%20Message'>Delete this Message</a></td>";
+            echo "<td width=\"90%\"><span>First Name:</span>".htmlentities($currMsg[0]). "<br>\n";
+            echo "<span>Last Name: </span>" . htmlentities($currMsg[1]) . "<br>\n";
+            echo "<span>E-mail: </span>" . htmlentities($currMsg[2]) . "</td>\n";
+            echo "<td width=\"10%\" style=\"text-align:center\">". "<a href='GuestBook.php?". "action=Delete%20Message&" . "message=" . ($index-1) . "'>"."Delete this Message</a></td>";
             echo "</tr>\n"; 
+            $index++;
         }
         echo "</table>\n"; 
     //fail  
